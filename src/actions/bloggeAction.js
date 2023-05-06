@@ -45,9 +45,9 @@ export const getPosts = (posts) => {
 export const startGetComments = (id) => {
   return (dispatch) => {
     axios
-      .get(`https://jsonplaceholder.typicode.com/comments`)
+      .get(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
       .then((response) => {
-        dispatch(getComments(response.data));
+        dispatch(setComments(response.data));
       })
       .catch((err) => {
         alert(err.message);
@@ -55,9 +55,15 @@ export const startGetComments = (id) => {
   };
 };
 
-export const getComments = (comments) => {
+export const setComments = (comments) => {
   return {
-    type: "GET_COMMENTS",
+    type: "SET_COMMENTS",
     payload: comments,
+  };
+};
+
+export const removeComments = () => {
+  return {
+    type: "REMOVE_COMMENTS",
   };
 };

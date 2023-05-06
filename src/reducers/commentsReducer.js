@@ -2,8 +2,11 @@ const commentsInitialState = [];
 
 const commentsReducer = (state = commentsInitialState, action) => {
   switch (action.type) {
-    case "GET_COMMENTS": {
+    case "SET_COMMENTS": {
       return [...action.payload];
+    }
+    case "REMOVE_COMMENTS": {
+      return commentsInitialState;
     }
     default: {
       return [...state];

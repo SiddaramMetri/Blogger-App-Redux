@@ -1,7 +1,11 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { removeComments, startGetComments } from "../actions/bloggeAction";
 
 const ShowComments = (props) => {
   const postsId = props.match.params.id;
+
+  const dispatch = useDispatch();
 
   const post = useSelector((state) => {
     return state.posts.find((post) => post.id == postsId);
@@ -11,8 +15,18 @@ const ShowComments = (props) => {
     state.users.find((ele) => ele.id == post.userId)
   );
 
+  useEffect(() => {
+    return () => {
+      dispatch(removeComments());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(startGetComments(postsId));
+  }, []);
+
   const comments = useSelector((state) => {
-    return state.comments.filter((comment) => comment.postId == post.id);
+    return state.comments;
   });
 
   return (

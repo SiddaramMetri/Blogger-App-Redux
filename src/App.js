@@ -5,18 +5,13 @@ import { Link, Route } from "react-router-dom";
 import ShowPosts from "./components/ShowPosts";
 import ShowComments from "./components/ShowComments";
 import { useDispatch } from "react-redux";
-import {
-  startGetComments,
-  startGetPosts,
-  startGetUsers,
-} from "./actions/bloggeAction";
+import { startGetPosts, startGetUsers } from "./actions/bloggeAction";
 import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(startGetComments());
     dispatch(startGetPosts());
     dispatch(startGetUsers());
   }, [dispatch]);
